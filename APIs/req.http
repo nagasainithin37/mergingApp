@@ -1,0 +1,45 @@
+POST http://localhost:3000/products/addprod
+Content-Type: application/json
+
+{
+    "id":1,
+    "name":"RedBull",
+    "price":1000
+}
+
+###
+GET http://localhost:3000/products/allprods
+
+###
+GET http://localhost:3000/products/getprod/3
+
+###
+PUT http://localhost:3000/products/updateprod
+Content-Type: application/json
+
+{
+    "id":2,
+    "name":"BlackBull",
+    "price":500
+}
+
+###
+DELETE http://localhost:3000/products/delete/1
+
+###
+POST http://localhost:3000/users/createuser
+Content-Type: application/json
+
+{
+    "username":"nithin",
+    "password":"nithin"
+}
+
+###
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+ "username":"nithin",
+    "password":"nithin"   
+}
