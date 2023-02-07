@@ -40,3 +40,19 @@
     npm install dotenv
     require('dotenv').config()
     let x=process.env.x to access x
+
+## Step 7:
+
+    If routing implemented handle non backend routes by  IMPLEMENTING FOLLOWING CODE
+
+    app.use('*"(req,res)=>{
+        res.sendFile(path.join(__dirname,'./build/index.js'))
+    })
+
+## Step 8:
+
+    create a form for signup and to post the object use axios
+
+    axios.post('path',obj)
+    .then()
+    .catch()

@@ -29,12 +29,15 @@ mClient.connect(DBurl)
 
 
 //forward to user App
-
 app.use('/users',userApp)
 
 //forward to product app
-
 app.use('/products',prodApp)
+
+
+app.use('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'./build/index.html'))
+})
 
 app.use((req,res,next)=>{
     res.send({message:`Invalid path ${req.url}`})

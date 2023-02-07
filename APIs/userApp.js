@@ -15,12 +15,13 @@ userApp.post('/createuser',expressAsyncHandler(async(req,res)=>{
 
     const userCollectionObj=req.app.get('userCollectionObj')
     let result=await userCollectionObj.findOne({username:req.body.username})
-    console.log(result)
+
     if (result==null){
 
         let hashPsw=await bcryptjs.hash(req.body.password,5)
+        let obj=req.body
         
-        await userCollectionObj.insertOne({'username':req.body.username,'password':hashPsw})
+        await userCollectionObj.insertOne({...obj,'password':hashPsw})
         res.send({message:'User created successfully'})
     }
     else{
