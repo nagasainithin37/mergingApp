@@ -46,7 +46,7 @@
     If routing implemented handle non backend routes by  IMPLEMENTING FOLLOWING CODE
 
     app.use('*"(req,res)=>{
-        res.sendFile(path.join(__dirname,'./build/index.js'))
+        res.sendFile(path.join(__dirname,'./build/index.html'))
     })
 
 ## Step 8:
