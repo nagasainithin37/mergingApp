@@ -1,12 +1,20 @@
 import { MdLogin } from "react-icons/md";
 import {useForm} from 'react-hook-form'
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function Signup() {
-
+const navigate=useNavigate();
     const {register,handleSubmit,formState:{errors}}=useForm()
     var OnSubmit=(obj)=>{
         axios.post('http://localhost:3000/users/createuser',obj)
-        .then(res=>alert(res.data.message))
+        .then(res=>{
+            if(res.data.message=='User created successfully'){
+                navigate('/login')
+            }
+            else{
+                alert(res.data.message)
+            }
+        })
         .catch(err=>alert(err.message))
     }
 
