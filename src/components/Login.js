@@ -1,13 +1,26 @@
 import {useForm} from 'react-hook-form'
 import { MdLogin } from "react-icons/md";
-
+import { LoginUser } from '../store/userLogin';
+import { useDispatch,useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 function Login() {
 
      const {register,handleSubmit,formState:{errors}}=useForm()
-
+     let{users,isPending,isSuccess,isError,errMsg}=useSelector(state=>state.user)
+let dispatch=useDispatch();
+ let navigate=useNavigate()
+ if(isSuccess==true){
+    console.log('Satisfied')
+    navigate('/userdashboard')
+ }
+ if(isError===true){
+   alert(`${errMsg}`)
+ }
      var OnSubmit=(obj)=>{
-        console.log(obj)
-     }
+        dispatch(LoginUser(obj))
+       
+
+     };
     return ( 
    <div>
         

@@ -45,7 +45,7 @@ app.use((req,res,next)=>{
 
 //Error Handling Route
 app.use((err,req,res,next)=>{
-    res.send({message:'Error occured',reason:`${err.message}`})
+    res.send({message:`${err}`,reason:`${err.message}`})
 })
 const port=process.env.PORT
 app.listen(port,()=>{console.log("server is listining")})

@@ -56,3 +56,101 @@
     axios.post('path',obj)
     .then()
     .catch()
+
+# Implementing Login Page
+
+## Step 1:
+
+    Setup redux store and create a slice for userLogin
+
+## Step 2:
+
+    If user login is successful save token  in local storage setItem getItem removeItem
+    return the response
+    else
+    return rejectedWithValue(data)
+
+# Uploading Images
+
+## Step 1:
+
+    create a input field for uploading images
+    <input type="file" onchange={(event)=>onImageSelect(event)} {...register{'photo',requires:true}}>
+
+    let [image,setImage]=useState(null)
+
+    var onImageSelect=(event)=>{
+        setImage(event.target.file[0])
+    }
+
+## Step 2:
+
+    create object of formData to send images also in form submit
+
+    var onformSubmit=(obj)=>{
+
+        formData=new FormData()
+
+        formData.append('userObj',JSON.stringify(obj))
+        formData.append('photo',image)
+
+        axios.post("",formData)
+        .then()
+        .catch()
+
+## Step 3:
+
+    use Cloudinary to store images
+
+    install the following to use cloudinary
+    cloudinary
+    multer-storage-cloudinary
+    multer
+
+## Step 4:
+
+    Setting up cloudinary in userApi
+
+    var cloudinary=require('cloudinary').v2;
+    const { CloudinaryStorage }=require('multer-storage-cloudinary');
+    const multer=require('multer')
+
+    cloudinary.config({
+            cloud_name:process.env.CLOUD_NAME,
+            api_key:process.env.API_KEY,
+            api_secret:process.env.API_SECRET,
+            secret:true,
+        })
+
+    const storage=new CloudinaryStorage({
+
+        cloudinary:cloudinary,
+
+        params:async(req,file)=>{
+
+            return {
+                    folder:"merge",
+                    public_id:file.fieldname +'=' +Date.now(),
+                };
+            },
+        });
+
+
+    var upload = multer({storage:storage})
+
+## Step 5:
+
+    userApp.post('',upload.single("photo"),expressAsyncHandler(async(req,res)=>{
+
+        //to get path of file use
+        let loc=req.file.path
+    }))
+
+## Step 6:
+
+    convert the string in fileData to usser object and delete photo in it and add the uploaded photo url
+
+    let userObj=JSON.parse(req.body.userObj)
+    delete
+    userObj.profileImage=   req.file.path
+    delete userObj.photo
